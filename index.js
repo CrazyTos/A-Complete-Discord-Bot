@@ -2,7 +2,11 @@ require('dotenv').config();
 const fs = require('fs');
 const discord = require('discord.js');
 const client = new discord.Client({ disableMentions: 'everyone' });
-const emojis = require('./utils/emojis');
+const { emojis } = require('./utils/emojis');
+const { configure_i18n } = require('./utils/language');
+
+// Language
+configure_i18n();
 
 
 client.commands = new discord.Collection();
@@ -10,7 +14,7 @@ client.emotes = emojis;
 
 
 fs.readdirSync('./events').filter(files => files.endsWith('.js')).forEach(event_file => {
-    const eventName = file.split(".")[0];
+    const eventName = event_file.split(".")[0];
     const event = require(`./events/${event_file}`);
     client.on(eventName, event.bind(null, client));
 });
