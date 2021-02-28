@@ -4,5 +4,5 @@ module.exports = {
         error: ':x:',
         alert: ':warning:',
         music: ':musical_note:',
-    }
+    },
 };
