@@ -1,5 +1,22 @@
 {
-	"test": {
-		"testx": "test-en"
+	"permissionsName": {
+		// coming soon
+	},
+	"discordjsCommando":{
+		"onBlock": {
+			"guildOnly": "The ``%s`` command must be used in a server channel.",
+			"nsfw": "The ``%s`` command can only be used in NSFW channels.",
+			"permission": "You do not have permission to use the ``%s`` command.",			
+			"throttling": "You may not use the ``{{name}}`` command again for another {{seconds}} seconds.",	
+			"clientPermissions": {
+				"one": "I need the {{permission}} permission for the ``{{name}}`` command to work.",
+				"more": "I need the following permissions for the ``{{name}}`` command to work:\n{{permissions}}"
+			}		
+		}
+	},
+	"ping": {
+		"latency": "Latency",
+		"apiLatency": "API Latency",
+		"ms": "ms"
 	}
 }

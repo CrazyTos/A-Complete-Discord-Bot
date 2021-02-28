@@ -2,17 +2,16 @@ const path = require('path');
 const i18n = require('i18n');
 const { languages } = require('./languages-config');
 
-
 function getLocales() {
     const locales = [];
-    languages.forEach(lang => {
-        locales.push(lang.locale)
+    languages.forEach((lang) => {
+        locales.push(lang.locale);
     });
     return locales;
 }
 
 module.exports = {
-    configure_i18n : () => {
+    loadLanguages: () => {
         i18n.configure({
             // setup some locales
             locales: getLocales(),
@@ -27,15 +26,15 @@ module.exports = {
             // enable object notation
             objectNotation: true,
             // setting of log level WARN
-            logWarnFn: function (msg) {
-                console.log("warn", msg);
+            logWarnFn(msg) {
+                console.log('warn', msg);
             },
             // setting of log level ERROR
-            logErrorFn: function (msg) {
-                console.log("error", msg);
+            logErrorFn(msg) {
+                console.log('error', msg);
             },
             // used to alter the behaviour of missing keys
-            missingKeyFn: function (locale, value) {
+            missingKeyFn(locale, value) {
                 return value;
             },
             // object or [obj1, obj2] to bind the i18n api and current locale to
@@ -43,8 +42,9 @@ module.exports = {
             // use mustache with customTags
             mustacheConfig: {
                 tags: ['{{', '}}'],
-                disable: false
-              }
+                disable: false,
+            },
         });
-    }
-}
+        i18n.setLocale('en_US');
+    },
+};

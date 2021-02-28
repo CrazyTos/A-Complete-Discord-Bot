@@ -1,5 +1,22 @@
 {
-	"test": {
-		"testx": "test-ptbr"
-	}
+	"permissionsName": {
+		// coming soon
+	},
+	"discordjsCommando":{
+		"onBlock": {
+			"guildOnly": "O commando ``%s`` deve ser usado no canal do Servidor.",
+			"nsfw": "O commando ``%s``só pode ser usado em canais NSFW.\n(Not Safe for Work)",
+			"permission": "Você não tem permissão para usar o comando ``%s``.",			
+			"throttling": "Você não pode usar o comando ``{{name}}`` novamente por mais {{seconds}} segundos.",
+			"clientPermissions": {
+				"one": "Eu preciso da permissão {{permission}} para o comando ``{{name}}`` funcionar.",
+				"more": "Eu preciso das seguintes permissões para o comando ``{{name}}`` funcionar: \n{{permissions}}"
+			}		
+		}
+	},
+	"ping": {
+		"latency": "Latencia",
+		"apiLatency": "Latencia da API",
+		"ms": "ms"
+	}	
 }
