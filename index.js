@@ -15,8 +15,8 @@ const client = new Client({
 });
 
 client.setProvider(
-    MongoClient.connect(process.env.MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
-        .then((clientMongo) => new MongoDBProvider(clientMongo, 'theguild')),
+    MongoClient.connect(process.env.MONGODB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
+        .then((clientMongo) => new MongoDBProvider(clientMongo, process.env.MONGODB_DBNAME)),
 ).catch(console.error);
 
 loadLanguages();
