@@ -1,6 +1,6 @@
 {
 	"permissionsName": {
-		// coming soon
+		"coming": "soon"
 	},
 	"discordjsCommando":{
 		"onBlock": {
@@ -18,5 +18,21 @@
 		"latency": "Latency",
 		"apiLatency": "API Latency",
 		"ms": "ms"
+	},
+	"prefix": {
+		"currentPrefix": "The command prefix is ``%s``.\n",
+		"currentPrefixNone": "There is no command prefix.\n",
+		"permissions": {
+			"noADMINISTRATOR": "Only administrators may change the command prefix."
+		},
+		"setPrefix": {
+			"noPrefix": "no prefix",
+			"newPrefix": "Set the command prefix to ``%s``."
+		},
+		"resetPrefix": "Reset the command prefix to the default (currently %s).",
+		"removedPrefix": "Removed the command prefix entirely."
+	},
+	"utils": {
+		"runCommandUse": "To run commands, use %s"
 	}
 }

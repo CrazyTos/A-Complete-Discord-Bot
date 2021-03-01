@@ -26,6 +26,7 @@ client.emotes = emojis;
 client.registry
     .registerGroups([
         ['info', 'Info Commands.'],
+        ['administration', 'Administration Commands.'],
     ])
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
