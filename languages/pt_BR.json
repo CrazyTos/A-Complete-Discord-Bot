@@ -1,38 +1,12 @@
 {
-	"permissionsName": {
-		"coming": "soon"
-	},
-	"discordjsCommando":{
-		"onBlock": {
-			"guildOnly": "O commando ``%s`` deve ser usado no canal do Servidor.",
-			"nsfw": "O commando ``%s``só pode ser usado em canais NSFW.\n(Not Safe for Work)",
-			"permission": "Você não tem permissão para usar o comando ``%s``.",			
-			"throttling": "Você não pode usar o comando ``{{name}}`` novamente por mais {{seconds}} segundos.",
-			"clientPermissions": {
-				"one": "Eu preciso da permissão {{permission}} para o comando ``{{name}}`` funcionar.",
-				"more": "Eu preciso das seguintes permissões para o comando ``{{name}}`` funcionar: \n{{permissions}}"
-			}		
-		}
-	},
-	"ping": {
-		"latency": "Latencia",
-		"apiLatency": "Latencia da API",
-		"ms": "ms"
-	},
-	"prefix": {
-		"currentPrefix": "To prefixo do comando é ``%s``.\n",
-		"currentPrefixNone": "Não há prefixo de comando.\n",
-		"permissions": {
-			"noADMINISTRATOR": "Apenas os administradores podem alterar o prefixo do comando."
-		},
-		"setPrefix": {
-			"noPrefix": "sem prefixo",
-			"newPrefix": "Prefixo definido para ``%s``."
-		},
-		"resetPrefix": "Prefixo definido para o padrão ``%s``.",
-		"removedPrefix": "Removido totalmente o prefixo."
-	},
-	"utils": {
-		"runCommandUse": "Para executar comandos, use %s"
-	}
+    "commandErrors": {
+        "commandNotFound": {
+            "title": "**Oops...!**",
+            "description": [
+                "O comando que você está tentando usar não existe.",
+                "Veja a lista de comandos com ``\"ajuda\"``"
+            ]
+        },
+        "ExecutionError": "Ocorreu um erro ao executar esse comando."
+    }
 }

@@ -1,38 +1,12 @@
 {
-	"permissionsName": {
-		"coming": "soon"
-	},
-	"discordjsCommando":{
-		"onBlock": {
-			"guildOnly": "The ``%s`` command must be used in a server channel.",
-			"nsfw": "The ``%s`` command can only be used in NSFW channels.",
-			"permission": "You do not have permission to use the ``%s`` command.",			
-			"throttling": "You may not use the ``{{name}}`` command again for another {{seconds}} seconds.",	
-			"clientPermissions": {
-				"one": "I need the {{permission}} permission for the ``{{name}}`` command to work.",
-				"more": "I need the following permissions for the ``{{name}}`` command to work:\n{{permissions}}"
-			}		
-		}
-	},
-	"ping": {
-		"latency": "Latency",
-		"apiLatency": "API Latency",
-		"ms": "ms"
-	},
-	"prefix": {
-		"currentPrefix": "The command prefix is ``%s``.\n",
-		"currentPrefixNone": "There is no command prefix.\n",
-		"permissions": {
-			"noADMINISTRATOR": "Only administrators may change the command prefix."
-		},
-		"setPrefix": {
-			"noPrefix": "no prefix",
-			"newPrefix": "Set the command prefix to ``%s``."
-		},
-		"resetPrefix": "Reset the command prefix to the default (currently %s).",
-		"removedPrefix": "Removed the command prefix entirely."
-	},
-	"utils": {
-		"runCommandUse": "To run commands, use %s"
-	}
+    "commandErrors": {
+        "commandNotFound": {
+            "title": "**Oops...!**",
+            "description": [
+                "The Command you are trying to use does not exist.",
+                "Look at the list of commands with ``\"help\"``"
+            ]
+        },
+        "ExecutionError": "There was an error executing that command."
+    }
 }
