@@ -7,6 +7,26 @@
                 "Veja a lista de comandos com ``\"ajuda\"``"
             ]
         },
-        "ExecutionError": "Ocorreu um erro ao executar esse comando."
+        "ExecutionError": "Ocorreu um erro ao executar esse comando.",
+        "userWithoutPermission": ":exclamation: Você não possui a permissão necessaria para executar este comando."
+    },
+    "commands": {
+        "prefix": {
+            "current": "O Seu prefixo Atual é `` {{prefix}} ``",
+            "new": "O prefixo personalizado do servidor agora é `` {{prefix}} ``",
+            "reset": {
+                "question": "Tem certeza de que deseja redefinir o **prefixo** para `` {{prefix}} ``",
+                "cancel": "A Redefinição do prefixo foi **Cancelada**.",
+                "confirm": "O **Prefixo** foi redefinido para `` {{prefix}} ``"
+            },
+            "error": "Não foi possível alterar seu prefixo. Entre em contato com o desenvolvedor."
+        }
+    },
+    "buttons": {
+        "text": {
+            "yes": "Sim",
+            "no": "Não",
+            "cancel": "Cancelar"
+        }
     }
 }

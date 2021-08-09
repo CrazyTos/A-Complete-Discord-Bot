@@ -7,6 +7,26 @@
                 "Look at the list of commands with ``\"help\"``"
             ]
         },
-        "ExecutionError": "There was an error executing that command."
+        "ExecutionError": "There was an error executing that command.",
+        "userWithoutPermission": ":exclamation: You do not have the necessary permission to execute this command."
+    },
+    "commands": {
+        "prefix": {
+            "current": "Your current prefix is `` {{prefix}} ``",
+            "new": "The server's custom prefix is now `` {{prefix}} ``",
+            "reset": {
+                "question": "Are you sure you want to reset the **prefix** to `` {{prefix}} ``",
+                "cancel": "Reset of prefix as been **Cancelled**.",
+                "confirm": "The **Prefix** has been reset to `` {{prefix}} ``"
+            },
+            "error": "It was not possible to change your prefix. Please contact the developer."
+        }
+    },
+    "buttons": {
+        "text": {
+            "yes": "Yes",
+            "no": "No",
+            "cancel": "Cancel"
+        }
     }
 }

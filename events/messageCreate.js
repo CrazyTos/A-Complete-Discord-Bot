@@ -1,29 +1,28 @@
 const i18n = require('i18n');
 const { deleteMessage } = require('../utils/message-utils');
+const { getGuildPrefix } = require('../utils/prefix-utils');
+const { checkUserHasPermissions } = require('../utils/permissions');
 
 module.exports = async (client, message) => {
     if (message.author.bot || !message.guild) return;
 
-    // Sets the guild.prefix
-    message.guild.prefix = process.env.PREFIX;
+    // Get prefix in DB
+    const guildPrefix = await getGuildPrefix(message);
 
     // Does not contain the prefix.
-    if (message.content.slice(0, message.guild.prefix.length) !== message.guild.prefix) {
+    if (message.content.slice(0, guildPrefix.length) !== guildPrefix) {
         return;
     }
 
-    const args = message.content.includes(message.guild.prefix)
-        ? message.content.slice(message.guild.prefix.length).trim().split(/ +/)
+    const args = message.content.includes(guildPrefix)
+        ? message.content.slice(guildPrefix.length).trim().split(/ +/)
         : message.content.trim().split(/ +/);
 
-    const commandName = message.content.includes(message.guild.prefix)
+    const commandName = message.content.includes(guildPrefix)
         ? args.shift().toLowerCase()
         : args[0].toLowerCase();
 
-    // Empty CommandName
-    if (!commandName) {
-        return;
-    }
+    if (!commandName) return; // Empty CommandName
 
     // Search Command by name, aliases
     let command =
@@ -46,24 +45,34 @@ module.exports = async (client, message) => {
                 ],
             })
             .then((msg) => {
-                // Delete Bot message
-                deleteMessage(msg);
+                deleteMessage(msg); // Delete Bot message
             })
             .catch(console.error);
-        // Delete User command message
-        deleteMessage(message);
+        deleteMessage(message); // Delete User command message
         return false;
     }
 
     // Execute Command
     try {
-        command.execute(message, args);
+        // Check Command Permissions
+        const userHasPerm = checkUserHasPermissions(command.permissions, message);
+        if (!userHasPerm) {
+            return message
+                .reply(i18n.__('commandErrors.userWithoutPermission'))
+                .then((msg) => {
+                    deleteMessage(msg); // Delete Bot message
+                })
+                .catch(console.error);
+        }
+
+        command.execute(message, args, client).then((msg) => {
+            deleteMessage(msg); // Delete Bot message
+        });
     } catch (error) {
         console.error(error);
         message.reply(i18n.__('commandErrors.ExecutionError')).catch(console.error);
         return false;
     }
 
-    // Delete User command message
-    deleteMessage(message);
+    deleteMessage(message); // Delete User command message
 };
