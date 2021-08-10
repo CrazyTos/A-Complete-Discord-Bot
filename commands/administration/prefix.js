@@ -1,9 +1,25 @@
 const i18n = require('i18n');
 const { Message, MessageActionRow, MessageButton, Interaction } = require('discord.js');
 const prefixModel = require('../../models/prefixModel');
-const { collectorResetPrefix } = require('../../collectors/buttons/prefix');
+const { buttonCollector } = require('../../collectors/buttonCollector');
 const { getGuildPrefix } = require('../../utils/prefix-utils');
 const { deleteMessage } = require('../../utils/message-utils');
+
+const customIds = {
+    'cprefix-cancel': async (interaction) => {
+        await interaction.update({
+            content: i18n.__('commands.prefix.reset.cancel'),
+            components: [],
+        });
+    },
+    'cprefix-confirm': async (interaction) => {
+        await prefixModel.findOneAndDelete({ Guild: message.guild.id });
+        await interaction.update({
+            content: i18n.__('commands.prefix.reset.confirm', { prefix: process.env.PREFIX }),
+            components: [],
+        });
+    },
+};
 
 module.exports = {
     name: 'prefix',
@@ -45,7 +61,7 @@ module.exports = {
             });
 
             // Receiving buttons & Responding
-            collectorResetPrefix(msg, message.author.id);
+            buttonCollector(customIds, msg, message.author.id);
             return;
         }
 
