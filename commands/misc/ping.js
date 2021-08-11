@@ -3,7 +3,7 @@ const { Client, Message } = require('discord.js');
 module.exports = {
     name: 'ping',
     aliases: [],
-    arguments: [],
+    arguments: {},
     description: 'Get the latency.',
     permissions: [],
     /**

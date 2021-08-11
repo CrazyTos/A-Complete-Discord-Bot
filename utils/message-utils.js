@@ -1,10 +1,10 @@
-function deleteMessage(message) {
+function deleteMessage(message, time = process.env.TIMEOUT) {
     if (!message) return;
 
     setTimeout(() => {
         if (message.deleted) return; // Already deleted
         message.delete();
-    }, process.env.TIMEOUT);
+    }, time);
 }
 
 module.exports = {

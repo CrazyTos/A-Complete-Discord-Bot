@@ -24,8 +24,13 @@ const customIds = {
 module.exports = {
     name: 'prefix',
     aliases: [],
-    arguments: ['<new prefix>', 'reset'],
-    description: 'Replies with Pong!',
+    arguments: {
+        '<new prefix>': 'descrição',
+        'reset': 'descrição',
+        '<arg1> <argInside1>': 'descrição',
+        '<arg1> <argInside2> <argInsideFinal/<argInsideFinal2> ': 'descrição',
+    },
+    description: 'Manage prefix.',
     permissions: ['MANAGE_GUILD'],
     /**
      *

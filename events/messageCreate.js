@@ -9,6 +9,9 @@ module.exports = async (client, message) => {
     // Get prefix in DB
     const guildPrefix = await getGuildPrefix(message);
 
+    // Set prefix in client
+    client.guildPrefix = guildPrefix;
+
     // Does not contain the prefix.
     if (message.content.slice(0, guildPrefix.length) !== guildPrefix) {
         return;
@@ -66,7 +69,7 @@ module.exports = async (client, message) => {
         }
 
         command.execute(message, args, client).then((msg) => {
-            deleteMessage(msg); // Delete Bot message
+            deleteMessage(msg, 15000); // Delete Bot message
         });
     } catch (error) {
         console.error(error);
