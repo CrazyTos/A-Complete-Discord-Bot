@@ -29,7 +29,7 @@ module.exports = {
         '<new prefix>': i18n.__('commands.prefix.args.newPrefix'),
         'reset': i18n.__('commands.prefix.args.reset', { prefix: process.env.PREFIX }),
     },
-    description: 'Manage prefix.',
+    description: i18n.__('commands.prefix.description'),
     permissions: ['MANAGE_GUILD'],
     /**
      *
