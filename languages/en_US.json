@@ -20,10 +20,17 @@
                 "confirm": "The **Prefix** has been reset to `` {{prefix}} ``"
             },
             "error": "It was not possible to change your prefix. Please contact the developer.",
+            "description": "Manage prefix.",
             "args": {
                 "showCurrent": "Shows the current prefix.",
                 "newPrefix": "Define the new prefix.",
                 "reset": "Sets the prefix to default `` {{prefix}} ``."
+            }
+        },
+        "ping": {
+            "description": "Get the latency.",
+            "args": {
+                "showPing": "Show the latency."
             }
         }
     },

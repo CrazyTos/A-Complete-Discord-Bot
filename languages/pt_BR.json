@@ -24,6 +24,13 @@
                 "showCurrent": "Mostra o prefixo atual.",
                 "newPrefix": "Define o novo prefixo.",
                 "reset": "Define o prefixo para o padrão `` {{prefix}} ``."
+            },
+            "description": "Gerenciar prefixo."
+        },
+        "ping": {
+            "description": "Get the latency.",
+            "args": {
+                "showPing": "Show the latency."
             }
         }
     },
