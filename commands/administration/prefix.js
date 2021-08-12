@@ -1,5 +1,5 @@
 const i18n = require('i18n');
-const { Message, MessageActionRow, MessageButton, Interaction } = require('discord.js');
+const { Message, MessageActionRow, MessageButton } = require('discord.js');
 const prefixModel = require('../../models/prefixModel');
 const { buttonCollector } = require('../../collectors/buttonCollector');
 const { getGuildPrefix } = require('../../utils/prefix-utils');
@@ -25,10 +25,9 @@ module.exports = {
     name: 'prefix',
     aliases: [],
     arguments: {
-        '<new prefix>': 'descrição',
-        'reset': 'descrição',
-        '<arg1> <argInside1>': 'descrição',
-        '<arg1> <argInside2> <argInsideFinal/<argInsideFinal2> ': 'descrição',
+        '': i18n.__('commands.prefix.args.showCurrent'),
+        '<new prefix>': i18n.__('commands.prefix.args.newPrefix'),
+        'reset': i18n.__('commands.prefix.args.reset', { prefix: process.env.PREFIX }),
     },
     description: 'Manage prefix.',
     permissions: ['MANAGE_GUILD'],

@@ -19,7 +19,12 @@
                 "cancel": "A Redefinição do prefixo foi **Cancelada**.",
                 "confirm": "O **Prefixo** foi redefinido para `` {{prefix}} ``"
             },
-            "error": "Não foi possível alterar seu prefixo. Entre em contato com o desenvolvedor."
+            "error": "Não foi possível alterar seu prefixo. Entre em contato com o desenvolvedor.",
+            "args": {
+                "showCurrent": "Mostra o prefixo atual.",
+                "newPrefix": "Define o novo prefixo.",
+                "reset": "Define o prefixo para o padrão `` {{prefix}} ``."
+            }
         }
     },
     "buttons": {
