@@ -1,3 +1,4 @@
+const i18n = require('i18n');
 const { Client, Message } = require('discord.js');
 
 module.exports = {
