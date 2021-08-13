@@ -1,5 +1,4 @@
 const i18n = require('i18n');
-const { checkUserHasPermissions } = require('../utils/permissions');
 const { deleteMessage } = require('../utils/message-utils');
 const { allCommands } = require('../utils/allCommands');
 
@@ -17,8 +16,7 @@ module.exports = async (client, interaction) => {
     // Execute Command
     try {
         // Check Command Permissions
-        const userHasPerm = checkUserHasPermissions(command.permissions, interaction);
-        if (!userHasPerm) {
+        if (!interaction.channel.permissionsFor(interaction.member).has(command.permissions)) {
             return interaction
                 .followUp(i18n.__('commandErrors.userWithoutPermission'))
                 .then((msg) => {
