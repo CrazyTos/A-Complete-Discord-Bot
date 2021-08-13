@@ -11,34 +11,31 @@
         "userWithoutPermission": ":exclamation: You do not have the necessary permission to execute this command."
     },
     "commands": {
-        "prefix": {
-            "current": "Your current prefix is `` {{prefix}} ``",
-            "new": "The server's custom prefix is now `` {{prefix}} ``",
-            "reset": {
-                "question": "Are you sure you want to reset the **prefix** to `` {{prefix}} ``",
-                "cancel": "Reset of prefix as been **Cancelled**.",
-                "confirm": "The **Prefix** has been reset to `` {{prefix}} ``"
-            },
-            "error": "It was not possible to change your prefix. Please contact the developer.",
-            "description": "Manage prefix.",
-            "args": {
-                "showCurrent": "Shows the current prefix.",
-                "newPrefix": "Define the new prefix.",
-                "reset": "Sets the prefix to default `` {{prefix}} ``."
-            }
-        },
         "ping": {
             "description": "Get the latency.",
             "args": {
                 "showPing": "Show the latency."
             }
-        }
-    },
-    "buttons": {
-        "text": {
-            "yes": "Yes",
-            "no": "No",
-            "cancel": "Cancel"
+        },
+        "help": {
+            "description": "List all of my commands or info about a specific command.",
+            "options": {
+                "commandName": "Show info about a specific command"
+            },
+            "errors": {
+                "commandNotFound": "Command Not found."
+            },
+            "embed": {
+                "title": "--= Help =--",
+                "fields": {
+                    "options": "Options"
+                }
+            },
+            "specificCommand": {
+                "commandArgs": {
+                    "notFound": "This command has no **Options**.\n Just use `` /{{commandName}} ``\u200B"
+                }
+            }
         }
     }
 }

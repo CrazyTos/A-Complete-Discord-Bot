@@ -1,7 +1,8 @@
 require('dotenv').config();
+require('./utils/language').loadLanguages();
+
 const fs = require('fs');
-const { Collection, Client, Intents } = require('discord.js');
-const { loadLanguages } = require('./utils/language');
+const { Client, Intents } = require('discord.js');
 const mongoose = require('mongoose');
 
 // DB Connection
@@ -25,25 +26,6 @@ const client = new Client({
     owner: process.env.ONWER_ID,
     commandPrefix: process.env.PREFIX,
 });
-
-loadLanguages();
-client.commands = new Collection();
-
-fs.readdirSync('./commands')
-    .filter(
-        (dir) =>
-            fs.existsSync(`./commands/${dir}`) && fs.lstatSync(`./commands/${dir}`).isDirectory()
-    )
-    .forEach((commandSubFolder) => {
-        fs.readdirSync(`./commands/${commandSubFolder}`)
-            .filter((file) => file.endsWith('.js'))
-            .forEach((commandFile) => {
-                const command = require(`./commands/${commandSubFolder}/${commandFile}`);
-                command.group = commandSubFolder.toLowerCase();
-                console.log(`[Commands] Loaded: ${command.name}`);
-                client.commands.set(command.name, command);
-            });
-    });
 
 fs.readdirSync('./events')
     .filter((files) => files.endsWith('.js'))

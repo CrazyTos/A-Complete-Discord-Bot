@@ -11,34 +11,31 @@
         "userWithoutPermission": ":exclamation: Você não possui a permissão necessaria para executar este comando."
     },
     "commands": {
-        "prefix": {
-            "current": "O Seu prefixo Atual é `` {{prefix}} ``",
-            "new": "O prefixo personalizado do servidor agora é `` {{prefix}} ``",
-            "reset": {
-                "question": "Tem certeza de que deseja redefinir o **prefixo** para `` {{prefix}} ``",
-                "cancel": "A Redefinição do prefixo foi **Cancelada**.",
-                "confirm": "O **Prefixo** foi redefinido para `` {{prefix}} ``"
-            },
-            "error": "Não foi possível alterar seu prefixo. Entre em contato com o desenvolvedor.",
-            "args": {
-                "showCurrent": "Mostra o prefixo atual.",
-                "newPrefix": "Define o novo prefixo.",
-                "reset": "Define o prefixo para o padrão `` {{prefix}} ``."
-            },
-            "description": "Gerenciar prefixo."
-        },
         "ping": {
-            "description": "Get the latency.",
+            "description": "Obtenha a latência.",
             "args": {
-                "showPing": "Show the latency."
+                "showPing": "Mostra a latência."
             }
-        }
-    },
-    "buttons": {
-        "text": {
-            "yes": "Sim",
-            "no": "Não",
-            "cancel": "Cancelar"
+        },
+        "help": {
+            "description": "Lista de todos os meus comandos ou informações sobre um comando específico.",
+            "options": {
+                "commandName": "Mostra informações sobre um comando específico"
+            },
+            "errors": {
+                "commandNotFound": "Comando não encontrado."
+            },
+            "embed": {
+                "title": "--= Ajuda =--",
+                "fields": {
+                    "options": "Opções"
+                }
+            },
+            "specificCommand": {
+                "commandArgs": {
+                    "notFound": "Este comando não possui **Opções**.\n Apenas use`` /{{commandName}} ``\u200B"
+                }
+            }
         }
     }
 }

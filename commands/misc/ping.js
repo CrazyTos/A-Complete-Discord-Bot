@@ -1,33 +1,31 @@
 const i18n = require('i18n');
-const { Client, Message } = require('discord.js');
+const { Client, CommandInteraction } = require('discord.js');
 
 module.exports = {
     name: 'ping',
-    aliases: [],
-    arguments: {
-        '': i18n.__('commands.ping.args.showPing'),
-    },
+    options: [],
     description: i18n.__('commands.ping.description'),
     permissions: [],
+    argsForHelp: {
+        '': i18n.__('commands.ping.args.showPing'),
+    },
     /**
      *
-     * @param {Message} message
-     * @param {String[]} args
+     * @param {CommandInteraction} interaction
      * @param {Client} client
      * @returns
      */
-    async execute(message, args, client) {
-        return message.channel.send('Pinging...').then((msg) => {
-            return msg.edit({
-                content: ':ping_pong:',
-                embeds: [
-                    {
-                        // description: `**${msg.createdAt - message.createdAt}ms**`,
-                        description: '**' + Math.round(client.ws.ping) + ' ms**',
-                        color: '#C14BF7',
-                    },
-                ],
-            });
+    async execute(interaction, client) {
+        interaction.followUp;
+        return interaction.followUp({
+            content: '. :ping_pong:',
+            embeds: [
+                {
+                    // description: `**${msg.createdAt - message.createdAt}ms**`,
+                    description: '**' + client.ws.ping + ' ms**',
+                    color: '#C14BF7',
+                },
+            ],
         });
     },
 };
