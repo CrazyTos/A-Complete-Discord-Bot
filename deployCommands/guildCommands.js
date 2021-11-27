@@ -1,15 +1,14 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const dotenv = require('dotenv');
 
-
-dotenv.config();
 const rest = new REST({ version: process.env.DISCORD_API_VERSION.toString() })
 	.setToken(process.env.DISCORD_TOKEN);
 
+
 // GET
+
 /**
- * @param {string} guildID
+ * @param {String} guildID
  */
 async function getGuildCommands(guildID) {
 	return await rest.get(
@@ -18,20 +17,19 @@ async function getGuildCommands(guildID) {
 }
 
 /**
- * @param {string} guildID
+ * @param {String} guildID
  * @returns {Array}
  */
-async function getGuildAllCommandsPermissions(guildID) {
+async function getGuildCommandsPermissions(guildID) {
 	const commands = await rest.get(
 		Routes.guildApplicationCommandsPermissions(process.env.APP_ID, guildID),
 	);
 	return commands;
 }
 
-
 /**
- * @param {string} guildID
- * @param {string} commandID
+ * @param {String} guildID
+ * @param {String} commandID
  * @returns {Array}
  */
 async function getGuildCommandPermissions(guildID, commandID) {
@@ -48,24 +46,10 @@ async function getGuildCommandPermissions(guildID, commandID) {
 
 
 // PUT
-/**
- * @param {string} guildID
- * @param {string} commandID
- * @param {string} roleID
- */
-async function removeRoleGuildCommandPermission(guildID, commandID, RoleID) {
-	const commandPermissions = await getGuildCommandPermissions(guildID, commandID);
-	const finalPermissions = commandPermissions.filter(
-		(currentValue) => (currentValue.id !== RoleID),
-	);
-
-	// Set new Permissions List
-	return await setGuildCommandPermissions(guildID, commandID, finalPermissions);
-}
 
 /**
- * @param {string} guildID
- * @param {string} commandID
+ * @param {String} guildID
+ * @param {String} commandID
  * @param {Array} permissionsList
  */
 async function setGuildCommandPermissions(guildID, commandID, permissionsList) {
@@ -79,19 +63,6 @@ async function setGuildCommandPermissions(guildID, commandID, permissionsList) {
 }
 
 /**
- * @param {string} guildID
- * @param {string} commandID
- * @param {string} roleID
- */
-async function addRoleGuildCommandPermissions(guildID, commandID, roleID) {
-	const commandPermissions = await getGuildCommandPermissions(guildID, commandID);
-	// Insert role in Command Permissions
-	commandPermissions.push({ id: roleID, type: 1, permission: true });
-	await setGuildCommandPermissions(guildID, commandID, commandPermissions);
-}
-
-
-/**
  * @param {String} guildID
  * @param {JSON} commadsJSON
  */
@@ -102,6 +73,10 @@ async function addGuildCommandsJSON(guildID, commadsJSON) {
 	).catch(console.error);
 }
 
+/**
+ * @param {String} guildID
+ * @param {String} commandID
+ */
 async function deleteGuildCommand(guildID, commandID) {
 	return await rest.delete(
 		Routes.applicationGuildCommand(process.env.APP_ID, guildID, commandID),
@@ -111,10 +86,9 @@ async function deleteGuildCommand(guildID, commandID) {
 
 module.exports = {
 	getGuildCommands,
-	removeRoleGuildCommandPermission,
-	getGuildAllCommandsPermissions,
+	getGuildCommandsPermissions,
 	getGuildCommandPermissions,
+	setGuildCommandPermissions,
 	addGuildCommandsJSON,
 	deleteGuildCommand,
-	addRoleGuildCommandPermissions,
 };

@@ -1,7 +1,7 @@
+const { addGuildCommandPermissionsRole } = require('../utils/guilds-utils');
 const {
 	getGuildCommands,
 	removeRoleGuildCommandPermission,
-	addRoleGuildCommandPermissions,
 } = require('../deployCommands/guildCommands');
 
 
@@ -38,6 +38,6 @@ async function updateCommandsPermissions(newRole) {
 	const apiCommandsForAddRole = apiAllCommands.filter(
 		(c) => (commandsWithMatchingPermissions.get(c.name)));
 	apiCommandsForAddRole.forEach(async (c) => {
-		await addRoleGuildCommandPermissions(newRole.guild.id, c.id, newRole.id);
+		await addGuildCommandPermissionsRole(newRole.guild.id, c.id, newRole.id);
 	});
 }

@@ -1,17 +1,32 @@
 const {
 	getGuildCommands,
+	getGuildCommandPermissions,
+	setGuildCommandPermissions,
 	addGuildCommandsJSON,
 	deleteGuildCommand,
 	addRoleGuildCommandPermissions,
 } = require('../deployCommands/guildCommands');
 
+
+/**
+ * @param {String} guildID
+ * @param {String} commandID
+ * @param {String} roleID
+ */
+async function addGuildCommandPermissionsRole(guildID, commandID, roleID) {
+	const commandPermissions = await getGuildCommandPermissions(guildID, commandID);
+	// Insert role in Command Permissions
+	commandPermissions.push({ id: roleID, type: 1, permission: true });
+	await setGuildCommandPermissions(guildID, commandID, commandPermissions);
+}
+
 /**
  * @typedef {import('discord.js').Collection} Collection
- * @param {string} guildID
+ * @param {String} guildID
  * @param {Collection} clientCommands
  * @param {Collection} guildRoles
  */
-async function updateGuildCommandsPermissions(guildID, clientCommands, guildRoles) {
+async function updateGuildCommandsPermissionsRole(guildID, clientCommands, guildRoles) {
 	const apiAllCommands = await getGuildCommands(guildID);
 	const clientCommandsWithPermissions = clientCommands.filter(
 		(c) => (c.userPermissions) && (c.userPermissions.length),
@@ -38,6 +53,20 @@ async function updateGuildCommandsPermissions(guildID, clientCommands, guildRole
 	});
 }
 
+/**
+ * @param {String} guildID
+ * @param {String} commandID
+ * @param {String} RoleID
+ */
+async function removeGuildCommandPermissionRole(guildID, commandID, RoleID) {
+	const commandPermissions = await getGuildCommandPermissions(guildID, commandID);
+	const finalPermissions = commandPermissions.filter(
+		(currentValue) => (currentValue.id !== RoleID),
+	);
+	// Set new Permissions List
+	return await setGuildCommandPermissions(guildID, commandID, finalPermissions);
+}
+
 
 /**
  * @typedef {import('discord.js').Collection} Collection
@@ -50,7 +79,7 @@ async function checkAndUpdateGuildsCommands(guilds) {
 			// Add All commands
 			await addGuildCommands(guildID, guild.client.commands);
 			// Update Permissions
-			await updateGuildCommandsPermissions(
+			await updateGuildCommandsPermissionsRole(
 				guildID, guild.client.commands, guild.roles.cache);
 			console.log('[Commands] Inserted the commands in the guild: '
                 + guild.name + ' / ' + guildID);
@@ -63,9 +92,9 @@ async function checkAndUpdateGuildsCommands(guilds) {
 
 
 /**
- * @param {string} guildID
+ * @param {String} guildID
  */
-async function deleteAllGuildCommand(guildID) {
+async function deleteAllGuildCommands(guildID) {
 	const guildCommands = await getGuildCommands(guildID);
 	if (!guildCommands.length) { return; }
 
@@ -78,7 +107,7 @@ async function deleteAllGuildCommand(guildID) {
 /**
  *
  * @typedef {import('discord.js').Collection} Collection
- * @param {string} guildID
+ * @param {String} guildID
  * @param {Collection} clientCommands
  */
 async function addGuildCommands(guildID, clientCommands) {
@@ -93,8 +122,10 @@ async function addGuildCommands(guildID, clientCommands) {
 
 
 module.exports = {
-	updateGuildCommandsPermissions,
+	addGuildCommandPermissionsRole,
+	updateGuildCommandsPermissionsRole,
+	removeGuildCommandPermissionRole,
 	checkAndUpdateGuildsCommands,
-	deleteAllGuildCommand,
+	deleteAllGuildCommands,
 	addGuildCommands,
 };

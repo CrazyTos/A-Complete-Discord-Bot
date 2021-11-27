@@ -1,5 +1,5 @@
 const {
-	getGuildAllCommandsPermissions,
+	getGuildCommandsPermissions,
 	setGuildCommandPermissions,
 } = require('../deployCommands/guildCommands');
 
@@ -18,7 +18,7 @@ module.exports = {
  * @param {Role} role
  */
 async function removeRoleFromCommands(role) {
-	const apiAllCommandsPermissions = await getGuildAllCommandsPermissions(role.guild.id);
+	const apiAllCommandsPermissions = await getGuildCommandsPermissions(role.guild.id);
 
 	apiAllCommandsPermissions.forEach(async (c) => {
 		if (!c.permissions.length) { return; }

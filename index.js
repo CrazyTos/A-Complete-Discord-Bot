@@ -1,8 +1,8 @@
 const { Client, Intents, Collection } = require('discord.js');
-const dotenv = require('dotenv');
-const fs = require('fs');
 const { getLanguagesList } = require('./utils/languages-utils');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const dotenv = require('dotenv');
+const fs = require('fs');
 
 dotenv.config();
 
