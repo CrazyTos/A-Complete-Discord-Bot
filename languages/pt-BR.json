@@ -1,0 +1,15 @@
+{
+    "commands": {
+        "language": {
+            "selectLanguage": "► Selecione o idioma",
+            "currentDefault": "Atual : {{current}} \nPadrão: en-US\n\nDefina o idioma:",
+            "notSupported": "Esse idioma não é suportado!",
+            "updating": "Atualizando linguagem...",
+            "updated": "Idioma definido!"
+        },
+        "ping": {
+            "pinging": "Pinging...",
+            "message": "Latência: **{{server}}ms**\nAPI : **{{api}}ms**"
+        }
+    }
+}

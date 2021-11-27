@@ -1,39 +1,44 @@
-require('dotenv').config();
-require('./utils/language').loadLanguages();
-
+const { Client, Intents, Collection } = require('discord.js');
+const dotenv = require('dotenv');
 const fs = require('fs');
-const { Client, Intents } = require('discord.js');
-const mongoose = require('mongoose');
+const { getLanguagesList } = require('./utils/languages-utils');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// DB Connection
-mongoose
-    .connect(process.env.MONGOOSE, {
-        useFindAndModify: false,
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    })
-    .then(console.log('[Mongoose] Conected!'));
+dotenv.config();
 
-const client = new Client({
-    intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_BANS,
-        Intents.FLAGS.GUILD_INVITES,
-        Intents.FLAGS.GUILD_VOICE_STATES,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    ],
-    owner: process.env.ONWER_ID,
-    commandPrefix: process.env.PREFIX,
-});
+// Adding to the client
+client.commands = new Collection();
+client.database = require('./database/mongoose-schemas.js');
+client.languagesList = getLanguagesList();
 
-fs.readdirSync('./events')
-    .filter((files) => files.endsWith('.js'))
-    .forEach((eventFile) => {
-        const eventName = eventFile.split('.')[0];
-        const event = require(`./events/${eventFile}`);
-        console.log(`Event ${eventName} Loaded !`);
-        client.on(eventName, event.bind(null, client));
-    });
+// Set commands in client.commands
+fs.readdirSync('./commands')
+	.filter(
+		(dir) => fs.existsSync(`./commands/${dir}`) &&
+		fs.lstatSync(`./commands/${dir}`).isDirectory())
+	.forEach((commandSubFolder) => {
+		fs.readdirSync(`./commands/${commandSubFolder}`)
+			.filter((file) => file.endsWith('.js'))
+			.forEach((commandFile) => {
+				const command = require(`./commands/${commandSubFolder}/${commandFile}`);
+				command.group = commandSubFolder.toLowerCase();
+				client.commands.set(command.data.name, command);
+			});
+	});
+
+
+// Events
+fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+	.forEach((eventFile) => {
+		const event = require(`./events/${eventFile}`);
+		if (event.once) {
+			client.once(event.name, (...args) => event.execute(...args));
+		}
+		else {
+			client.on(event.name, (...args) => event.execute(...args));
+		}
+		console.log('[EVENT] loaded : ' + event.name);
+	});
+
 
 client.login(process.env.DISCORD_TOKEN);

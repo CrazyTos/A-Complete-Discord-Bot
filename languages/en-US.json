@@ -1,0 +1,15 @@
+{
+    "commands": {
+        "language": {
+            "selectLanguage": "► Select the Language",
+            "currentDefault": "Current : {{current}} \nDefault: en-US\n\nSet the language :",
+            "notSupported": "That Language is not supported!",
+            "updating": "Updating language...",
+            "updated": "Language defined!"
+        },
+        "ping": {
+            "pinging": "Pinging...",
+            "message": "Latency: **{{server}}ms**\nAPI : **{{api}}ms**"
+        }
+    }
+}

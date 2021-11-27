@@ -1,31 +1,23 @@
-const i18n = require('i18n');
-const { Client, CommandInteraction } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { __ } = require('../../utils/languages-utils');
 
 module.exports = {
-    name: 'ping',
-    options: [],
-    description: i18n.__('commands.ping.description'),
-    permissions: [],
-    argsForHelp: {
-        '': i18n.__('commands.ping.args.showPing'),
-    },
-    /**
-     *
-     * @param {CommandInteraction} interaction
-     * @param {Client} client
-     * @returns
-     */
-    async execute(interaction, client) {
-        interaction.followUp;
-        return interaction.followUp({
-            content: '. :ping_pong:',
-            embeds: [
-                {
-                    // description: `**${msg.createdAt - message.createdAt}ms**`,
-                    description: '**' + client.ws.ping + ' ms**',
-                    color: '#C14BF7',
-                },
-            ],
-        });
-    },
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
+	globalCommand: false,
+	userPermissions: [],
+	async execute(interaction) {
+		const guildID = interaction.guildId;
+		const pingingMessage = await interaction.reply({
+			content: __(guildID, 'commands.ping.pinging'),
+			fetchReply: true,
+		});
+
+		const apiPing = interaction.client.ws.ping;
+		const serverPing = pingingMessage.createdTimestamp - interaction.createdTimestamp;
+
+		interaction.editReply(__(
+			guildID, 'commands.ping.message', { server: serverPing, api: apiPing }));
+	},
 };

@@ -1,19 +1,21 @@
-const { allCommands } = require('../utils/allCommands');
+const { checkAndUpdateGuildsCommands } = require('../utils/guilds-utils');
+const {
+	loadGuildsLanguages,
+	loadLanguagesTexts,
+} = require('../utils/languages-utils');
 
-module.exports = async (client) => {
-    client.user.setUsername(process.env.BOT_NAME);
-    client.user.setActivity('Life :3', { type: 'LISTENING' });
-    client.user.setStatus('dnd'); // online | idle | dnd | invisible
 
-    console.log(`Bot: ${client.user.username}, ${client.guilds.cache.size} Servers`);
-    console.log('\n\n');
+module.exports = {
+	name: 'ready',
+	once: true,
+	async execute(client) {
+		/* If the bot is added to the guild while it is offline,
+		this function will ensure that commands are added to the guild. */
+		await checkAndUpdateGuildsCommands(client.guilds.cache);
 
-    // Set Commands in Global
-    if (JSON.parse(process.env.COMMANDS_GLOBAL)) {
-        client.application.commands.set(allCommands());
-    }
-    // Set Commands in Guild
-    else if (process.env.COMMANDS_GUILD.length > 7) {
-        client.guilds.cache.get(process.env.COMMANDS_GUILD).commands.set(allCommands());
-    }
+		await loadGuildsLanguages(client);
+		await loadLanguagesTexts();
+
+		console.log(`Ready! Logged in as : ${client.user.tag}`);
+	},
 };
